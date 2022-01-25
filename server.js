@@ -27,7 +27,7 @@ const connectEnsureLogin = require('connect-ensure-login')
 //connecting database
 const brothers = mongoose.connection
 brothers.on('error', (error) => console.error(error))
-brothers.once('open', ()=>console.log('Connected to database'))
+brothers.once('open', () => console.log('Connected to database'))
 
 
 //Get brother by email
@@ -49,35 +49,35 @@ app.use(passport.session())
 
 async function getBrotherByEmail(email) {
     try {
-        const brothers = await Brother.find( { email:email})
+        const brothers = await Brother.find({ email: email })
         return brothers
-    }catch (err) {
-        
+    } catch (err) {
+
     }
 }
 
 async function getBrotherById(id) {
     try {
-        const brothers = await Brother.find( {id:id})
+        const brothers = await Brother.find({ id: id })
         return brothers[0]
-    }catch (err) {
-        
+    } catch (err) {
+
     }
 }
 
 
 
-passport.use(new LocalStrategy({usernameField: 'email'}, async (email,password,done) => {
+passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
     const brother = await (await getBrotherByEmail(email)).pop()
-    if (brother==null) {
-        return done(null, false, {message: 'No brother with that email'})
+    if (brother == null) {
+        return done(null, false, { message: 'No brother with that email' })
     }
 
     try {
         if (await bcrypt.compare(password, brother.password)) {
             return done(null, brother)
         } else {
-            return done(null, false, { message: 'Password incorrect'})
+            return done(null, false, { message: 'Password incorrect' })
         }
     } catch (e) {
         console.log(e)
@@ -86,11 +86,11 @@ passport.use(new LocalStrategy({usernameField: 'email'}, async (email,password,d
 }))
 
 
-passport.serializeUser((brother, done) => { 
-    return done(null, brother._id) 
+passport.serializeUser((brother, done) => {
+    return done(null, brother._id)
 })
 
-passport.deserializeUser((_id, done) => { 
+passport.deserializeUser((_id, done) => {
     return done(null, getBrotherById(_id))
 })
 
@@ -104,14 +104,14 @@ passport.deserializeUser((_id, done) => {
 
 app.get('/', checkAuthenticated, async (req, res) => {
     const brother = (await getBrotherByEmail(req.session.user)).pop()
-    res.render('index.ejs', { last_name: brother.last_name})
+    res.render('index.ejs', { last_name: brother.last_name })
 })
 
 app.get('/brothers', async (req, res) => {
     try {
-        const brothers = await Brother.find( {email:'test@test'})
+        const brothers = await Brother.find({ email: 'test@test' })
         res.send(brothers)
-    }catch (err) {
+    } catch (err) {
         res.status(500).json({ message: err.message })
     }
 })
@@ -138,7 +138,8 @@ app.use('/register', registerRouter)
 app.use('/logout', logoutRouter)
 app.use('/profile', profileRouter)
 app.use('/directory', directoryRouter)
+app.use(express.static('public'));
 
 app.listen(5500)
 
-module.exports = { checkAuthenticated, checkNotAuthenticated}
+module.exports = { checkAuthenticated, checkNotAuthenticated }

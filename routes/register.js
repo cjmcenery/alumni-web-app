@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
         const newBrother = await brother.save()
         res.status(201).redirect('/',)
     } catch (err) {
-        res.status(400).json({ message: err.message})
+        res.status(400).json({ message: err.message })
     }
 })
 

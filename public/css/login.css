@@ -1,0 +1,56 @@
+/* classes */
+
+.heading {
+    font-size: 30pt;
+}
+
+.body {
+    text-align: center;
+    font-family: "Helvetica";
+   color: #0B2027;
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+}
+
+.box {
+    padding: 15px;
+    margin:auto;
+    width: 33%;
+    background-color: #F1F0EA;
+    opacity: 90%;
+}
+
+.loginitem {
+    font-size: large;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.textbox {
+    margin-left: 10px;
+}
+
+.button {
+    font-weight: bold;
+    padding: 10px;
+    margin-top: 10px;
+    border:none;
+    color: #F1F0EA;
+    background-color: #6B0F1A;
+    width: 75%;
+    font-size: large;
+}
+
+/* ids */
+
+html {
+    background: url('../images/house.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
