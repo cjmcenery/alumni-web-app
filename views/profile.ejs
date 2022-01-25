@@ -1,0 +1,15 @@
+<h1>Cornell Kappa Sigma</h1>
+<a href='/'>Home</a>
+<a href='/directory'>Directory</a>
+<a href='/profile'>Profile</a>
+<h1>Brother <%= brother.last_name %>'s Profile</h1>
+<form action="/logout" method="POST">
+
+    <button type="submit">Logout</button>
+</form>
+
+
+
+<h2><%= brother.first_name %> <%= brother.last_name %></h2>
+<h2>Cornell Class of <%= brother.year %></h2>
+<h2><%= brother.address1 %>, <%= brother.city %>, <%= brother.state %>, <%= brother.zip %></h2>

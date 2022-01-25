@@ -10,6 +10,8 @@ mongoose.connect(process.env.MONGO)
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
 const logoutRouter = require('./routes/logout')
+const profileRouter = require('./routes/profile')
+const directoryRouter = require('./routes/directory')
 const initializePassport = require('./passport-config')
 const passport = require('passport')
 const flash = require('express-flash')
@@ -62,6 +64,8 @@ async function getBrotherById(id) {
         
     }
 }
+
+
 
 passport.use(new LocalStrategy({usernameField: 'email'}, async (email,password,done) => {
     const brother = await (await getBrotherByEmail(email)).pop()
@@ -132,6 +136,8 @@ function checkNotAuthenticated(req, res, next) {
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
 app.use('/logout', logoutRouter)
+app.use('/profile', profileRouter)
+app.use('/directory', directoryRouter)
 
 app.listen(5500)
 
