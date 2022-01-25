@@ -9,6 +9,7 @@ const mongoose = require('mongoose')
 mongoose.connect(process.env.MONGO)
 const loginRouter = require('./routes/login')
 const registerRouter = require('./routes/register')
+const logoutRouter = require('./routes/logout')
 const initializePassport = require('./passport-config')
 const passport = require('passport')
 const flash = require('express-flash')
@@ -19,6 +20,7 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const brother = require('./models/brother')
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
+const connectEnsureLogin = require('connect-ensure-login')
 
 //connecting database
 const brothers = mongoose.connection
@@ -89,15 +91,16 @@ passport.deserializeUser((_id, done) => {
 })
 
 
-const last_name = "Hello"
+
 
 // app.get('/', (req, res) => {
 //     res.render("index.ejs", { last_name: last_name} )
 // })
 
+
 app.get('/', checkAuthenticated, async (req, res) => {
-    console.log(req.session.user)
-    res.render('index.ejs', { last_name: last_name})
+    const brother = (await getBrotherByEmail(req.session.user)).pop()
+    res.render('index.ejs', { last_name: brother.last_name})
 })
 
 app.get('/brothers', async (req, res) => {
@@ -128,6 +131,7 @@ function checkNotAuthenticated(req, res, next) {
 
 app.use('/login', loginRouter)
 app.use('/register', registerRouter)
+app.use('/logout', logoutRouter)
 
 app.listen(5500)
 

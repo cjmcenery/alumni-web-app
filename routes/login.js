@@ -32,6 +32,7 @@ router.post('/', passport.authenticate('local', {
     failureFlash: true
 }), async (req, res) => {
     req.session.user = req.body.email
+
     res.redirect('/')
 
 })
