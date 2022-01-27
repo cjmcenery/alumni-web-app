@@ -18,6 +18,7 @@
   "homepage": "https://github.com/cjmcenery/alumni-web-app#readme",
   "dependencies": {
     "html": "^1.0.0",
+    "method-override": "^3.0.0",
     "mongo": "^0.1.0"
   },
   "devDependencies": {

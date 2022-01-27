@@ -23,6 +23,7 @@ const brother = require('./models/brother')
 const bcrypt = require('bcrypt')
 const bodyParser = require('body-parser')
 const connectEnsureLogin = require('connect-ensure-login')
+const methodOverride = require('method-override')
 
 //connecting database
 const brothers = mongoose.connection
@@ -46,6 +47,7 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(methodOverride('_method'))
 
 async function getBrotherByEmail(email) {
     try {

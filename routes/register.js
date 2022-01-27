@@ -35,7 +35,8 @@ router.post('/', async (req, res) => {
             address2: req.body.address2,
             city: req.body.city,
             state: req.body.state,
-            zip: req.body.zip
+            zip: req.body.zip,
+            account_type: 'user'
         })
         const newBrother = await brother.save()
         res.status(201).redirect('/',)

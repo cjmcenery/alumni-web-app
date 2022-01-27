@@ -13,3 +13,41 @@
 <h2><%= brother.first_name %> <%= brother.last_name %></h2>
 <h2>Cornell Class of <%= brother.year %></h2>
 <h2><%= brother.address1 %>, <%= brother.city %>, <%= brother.state %>, <%= brother.zip %></h2>
+<br>
+<br>
+<h2>Account type: <%= brother.account_type %></h2>
+
+<form action="/profile/edit/<%= brother.email %>?_method=PUT" method="POST">
+    <div class="loginitem">
+        <label for="email">Email</label>
+        <input class="textbox" type="email" id="email" name="email" value="<%= brother.email %>" required>
+        <br>
+        <label for="password">Password</label>
+        <input class="textbox" type="password" id="password" name="password" required>
+        <br>
+        <label for="first_name">First Name</label>
+        <input class="textbox" type="text" id="first_name" name="first_name" value="<%= brother.first_name %>" required>
+        <br>
+        <label for="last_name">Last Name</label>
+        <input class="textbox" type="text" id="last_name" name="last_name" value="<%= brother.last_name %>" required>
+        <br>
+        <label for="year">Cornell Grad Year</label>
+        <input class="textbox" type="text" id="year" name="year" value="<%= brother.year %>" required>
+        <br>
+        <label for="address1">Address Line 1</label>
+        <input class="textbox" type="address" id="address1" name="address1" value="<%= brother.address1 %>" required>
+        <br>
+        <label for="address2">Address Line 2</label>
+        <input class="textbox" type="address" id="address2" name="address2" value="<%= brother.address2 %>" required>
+        <br>
+        <label for="city">City</label>
+        <input class="textbox" type="city" id="city" name="city" value="<%= brother.city %>" required>
+        <br>
+        <label for="state">State</label>
+        <input class="textbox" type="state" id="state" name="state" value="<%= brother.state %>" required>
+        <br>
+        <label for="zip">Zip</label>
+        <input class="textbox" type="zip" id="zip" name="zip" value="<%= brother.zip %>" required>
+    </div>
+    <button type="submit">Save</button>
+</form>

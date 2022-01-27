@@ -50,6 +50,10 @@ const brotherSchema = new mongoose.Schema({
         type: String,
         required:true
     },
+    account_type: {
+        type: String,
+        required: true
+    }
 })
 
 brotherSchema.plugin(passportLocalMongoose);
